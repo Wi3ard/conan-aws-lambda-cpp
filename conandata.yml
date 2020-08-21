@@ -1,0 +1,9 @@
+sources:
+  "0.2.6":
+    url: "https://github.com/awslabs/aws-lambda-cpp/archive/v0.2.6.tar.gz"
+    sha256: "ef5cb0d5767edef5d1e3435e12cca39a19821f330d42c30aecfb1563a59dc40c"
+
+patches:
+  "0.2.6":
+    - patch_file: "patches/0001-cmake.patch"
+      base_path: "source_subfolder"
