@@ -63,6 +63,7 @@ jobs:
             fi
             echo "::set-env name=CONAN_DOCKER_IMAGE::${docker_image}"
             echo "export CONAN_DOCKER_IMAGE=${docker_image}"
+            conan profile new default
             conan profile update settings.compiler.libcxx=libstdc++11 default
           fi
           build_type="${{ matrix.config.buildType }}"
