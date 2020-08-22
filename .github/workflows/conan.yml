@@ -63,8 +63,6 @@ jobs:
             fi
             echo "::set-env name=CONAN_DOCKER_IMAGE::${docker_image}"
             echo "export CONAN_DOCKER_IMAGE=${docker_image}"
-            conan profile new default --detect
-            conan profile update settings.compiler.libcxx=libstdc++11 default
           fi
           build_type="${{ matrix.config.buildType }}"
           if ! [[ "${build_type}" == "" ]]; then
@@ -80,5 +78,7 @@ jobs:
         env:
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+          CONAN_UPLOAD: ${{ secrets.CONAN_UPLOAD }}
+          CONAN_UPLOAD_ONLY_WHEN_STABLE: ${{ secrets.CONAN_UPLOAD_ONLY_WHEN_STABLE }}
         run: |
           bincrafters-package-tools --auto
