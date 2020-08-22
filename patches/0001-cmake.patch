@@ -1,16 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 58a72c8..3e1b516 100644
+index 58a72c8..eb8327f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1,5 +1,7 @@
- cmake_minimum_required(VERSION 3.9)
- set(CMAKE_CXX_STANDARD 11)
-+set(CMAKE_CXX_EXTENSIONS OFF)
-+set(CMAKE_CXX_STANDARD_REQUIRED ON)
- project(aws-lambda-runtime
-     VERSION 0.2.6
-     LANGUAGES CXX)
-@@ -20,7 +22,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
+@@ -20,7 +20,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
      VERSION ${PROJECT_VERSION})
  
  target_include_directories(${PROJECT_NAME} PUBLIC
@@ -19,7 +11,7 @@ index 58a72c8..3e1b516 100644
      $<INSTALL_INTERFACE:include>)
  
  check_ipo_supported(RESULT has_lto OUTPUT lto_check_output)
-@@ -111,7 +113,7 @@ install(TARGETS ${PROJECT_NAME}
+@@ -111,7 +111,7 @@ install(TARGETS ${PROJECT_NAME}
      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
      )
  
@@ -28,7 +20,7 @@ index 58a72c8..3e1b516 100644
      "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
      @ONLY)
  
-@@ -125,6 +127,6 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+@@ -125,6 +125,6 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
      "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
      DESTINATION "lib/${PROJECT_NAME}/cmake/")
  
