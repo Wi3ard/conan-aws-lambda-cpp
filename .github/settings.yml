@@ -2,7 +2,7 @@ repository:
   # See https://developer.github.com/v3/repos/#edit for all available settings.
 
   # Either `true` to enable issues for this repository, `false` to disable them.
-  has_issues: false
+  has_issues: true
 
   # Either `true` to enable the wiki for this repository, `false` to disable it.
   has_wiki: false
