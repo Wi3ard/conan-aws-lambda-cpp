@@ -80,5 +80,6 @@ jobs:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
           CONAN_UPLOAD: ${{ secrets.CONAN_UPLOAD }}
           CONAN_UPLOAD_ONLY_WHEN_STABLE: ${{ secrets.CONAN_UPLOAD_ONLY_WHEN_STABLE }}
+          CONAN_USERNAME: ${{ secrets.CONAN_USERNAME }}
         run: |
           bincrafters-package-tools --auto
