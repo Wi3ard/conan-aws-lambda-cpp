@@ -1,8 +1,14 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 58a72c8..eb8327f 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -20,7 +20,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
+--- a/CMakeLists.txt	2020-08-25 22:53:16.060000000 +0300
++++ b/CMakeLists.txt	2020-08-26 00:29:40.990000000 +0300
+@@ -4,6 +4,7 @@
+     VERSION 0.2.6
+     LANGUAGES CXX)
+ 
++option(ENABLE_LTO "Enables link time optimization." ON)
+ option(ENABLE_TESTS "Enables building the test project, requires AWS C++ SDK." OFF)
+ 
+ include(CheckIPOSupported)
+@@ -20,14 +21,16 @@
      VERSION ${PROJECT_VERSION})
  
  target_include_directories(${PROJECT_NAME} PUBLIC
@@ -10,8 +16,22 @@ index 58a72c8..eb8327f 100644
 +    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
      $<INSTALL_INTERFACE:include>)
  
- check_ipo_supported(RESULT has_lto OUTPUT lto_check_output)
-@@ -111,7 +111,7 @@ install(TARGETS ${PROJECT_NAME}
+-check_ipo_supported(RESULT has_lto OUTPUT lto_check_output)
+-if(has_lto)
+-    set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+-else()
+-    message(WARNING "Link-time optimization (LTO) is not supported: ${lto_check_output}")
++if (ENABLE_LTO)
++    check_ipo_supported(RESULT has_lto OUTPUT lto_check_output)
++    if(has_lto)
++        set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
++    else()
++        message(WARNING "Link-time optimization (LTO) is not supported: ${lto_check_output}")
++    endif()
+ endif()
+ 
+ find_package(CURL REQUIRED)
+@@ -111,7 +114,7 @@
      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
      )
  
@@ -20,7 +40,7 @@ index 58a72c8..eb8327f 100644
      "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
      @ONLY)
  
-@@ -125,6 +125,6 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+@@ -125,6 +128,6 @@
      "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
      DESTINATION "lib/${PROJECT_NAME}/cmake/")
  
